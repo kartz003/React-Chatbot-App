@@ -4,7 +4,12 @@ import { Chat } from "./components/Chat/Chat.jsx";
 import { Controls } from "./components/Controls/Controls.jsx";
 
 function App() {
-  const [messages, setMessages] = useState(MESSAGES);
+  const [messages, setMessages] = useState([]);
+
+  function handleContentSend(content) {
+    setMessages((prevMessages) =>[...prevMessages, { role: 'user', content }]);
+  }
+
   return (
     <div className={styles.App}>
       <header className={styles.Header}>
@@ -14,52 +19,9 @@ function App() {
       <div className={styles.ChatContainer}>
         <Chat messages={messages} />
       </div>
-      <Controls />
+      <Controls onSend={handleContentSend} />
     </div>
-  )
+  );
 }
-
-const MESSAGES = [
-  {
-    role: "user",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus voluptatibus ipsam illo eligendi obcaecati alias magni voluptate, corrupti adipisci quae esse fugiat nesciunt suscipit sunt laboriosam fuga aperiam sed. Sint?",
-  },
-  {
-    role: "assistant",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus voluptatibus ipsam illo eligendi obcaecati alias magni voluptate, corrupti adipisci quae esse fugiat nesciunt suscipit sunt laboriosam fuga aperiam sed. Sint?",
-  },
-  {
-    role: "user",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus voluptatibus ipsam illo eligendi obcaecati alias magni voluptate, corrupti adipisci quae esse fugiat nesciunt suscipit sunt laboriosam fuga aperiam sed. Sint?",
-  },
-  {
-    role: "assistant",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus voluptatibus ipsam illo eligendi obcaecati alias magni voluptate, corrupti adipisci quae esse fugiat nesciunt suscipit sunt laboriosam fuga aperiam sed. Sint?",
-  },
-  {
-    role: "user",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus voluptatibus ipsam illo eligendi obcaecati alias magni voluptate, corrupti adipisci quae esse fugiat nesciunt suscipit sunt laboriosam fuga aperiam sed. Sint?",
-  },
-  {
-    role: "assistant",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus voluptatibus ipsam illo eligendi obcaecati alias magni voluptate, corrupti adipisci quae esse fugiat nesciunt suscipit sunt laboriosam fuga aperiam sed. Sint?",
-  },
-  {
-    role: "user",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus voluptatibus ipsam illo eligendi obcaecati alias magni voluptate, corrupti adipisci quae esse fugiat nesciunt suscipit sunt laboriosam fuga aperiam sed. Sint?",
-  },
-  {
-    role: "assistant",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus voluptatibus ipsam illo eligendi obcaecati alias magni voluptate, corrupti adipisci quae esse fugiat nesciunt suscipit sunt laboriosam fuga aperiam sed. Sint?",
-  },
-];
 
 export default App
