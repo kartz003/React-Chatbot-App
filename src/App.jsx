@@ -2,12 +2,27 @@ import { useState } from "react";
 import styles from "./App.module.css";
 import { Chat } from "./components/Chat/Chat.jsx";
 import { Controls } from "./components/Controls/Controls.jsx";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+const googleai = new GoogleGenerativeAI(import.meta.env.VITE_GOOGLE_AI_API_KEY);
+const gemini = googleai.getGenerativeModel({ model: "gemini-3-flash-preview" });
+const chat = gemini.startChat({ history: [] });
 
 function App() {
   const [messages, setMessages] = useState([]);
 
-  function handleContentSend(content) {
-    setMessages((prevMessages) =>[...prevMessages, { role: 'user', content }]);
+  function addMessage(message) {
+    setMessages((prevMessages) =>[...prevMessages, message]);
+  }
+
+  async function handleContentSend(content) {
+    addMessage({ role: "user", content });
+    try {
+      const result = await chat.sendMessage(content);
+      addMessage({ role: "assistant", content: result.response.text() });
+    } catch (error) {
+      addMessage({ role: "system", content: "Sorry, I couldn't process your request. Please try again." });
+    }
   }
 
   return (
