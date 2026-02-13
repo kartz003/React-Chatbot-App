@@ -3,6 +3,7 @@ import styles from "./App.module.css";
 import { Chat } from "./components/Chat/Chat.jsx";
 import { Controls } from "./components/Controls/Controls.jsx";
 import { Assistant } from "./assistants/googleai.js";
+// import { Assistant } from "./assistants/openai.js"; // couldn't test because its not free
 
 function App() {
   const assistant = new Assistant;
@@ -15,7 +16,7 @@ function App() {
   async function handleContentSend(content) {
     addMessage({ role: "user", content });
     try {
-      const result = await assistant.chat(content);
+      const result = await assistant.chat(content, messages);
       addMessage({ role: "assistant", content: result });
     } catch (error) {
       addMessage({ role: "system", content: "Sorry, I couldn't process your request. Please try again." });
