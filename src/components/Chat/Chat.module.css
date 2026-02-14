@@ -18,3 +18,13 @@
     background: #f3f3f3;
   }
 }
+
+.Group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.Group:nth-last-of-type(2) {
+  min-height: calc(100% - 8px);
+}
