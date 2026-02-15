@@ -17,6 +17,10 @@
     align-self: flex-end;
     background: light-dark(#f3f3f3, #303030);
   }
+
+  &[data-role="system"] {
+    background: light-dark(#f9dbdb, #6d3030);
+  }
 }
 
 .Group {
