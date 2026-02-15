@@ -30,7 +30,7 @@ function App() {
     addMessage({ role: "user", content });
     setIsLoading(true);
     try {
-      const result = await assistant.chatStream(content);
+      const result = await assistant.chatStream(content, messages);
       let isFirstChunk = false
       for await (const chunk of result) {
         if (!isFirstChunk) {
