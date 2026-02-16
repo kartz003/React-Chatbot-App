@@ -9,6 +9,7 @@ import { Loader } from "./components/Loader/Loader.jsx";
 // import { Assistant } from "./assistants/anthropicai.js"; // couldn't test because its not free
 // import { Assistant } from "./assistants/xai.js"; // couldn't test because its not free
 import { Assistant } from "./components/Assistant/Assistant.jsx";
+import { Theme } from "./components/Theme/Theme.jsx";
 
 let assistant;
 
@@ -69,7 +70,10 @@ function App() {
         <Chat messages={messages} />
       </div>
       <Controls isDisabled={isLoading || isStreaming} onSend={handleContentSend} />
-      <Assistant onAssistantChange={handleAssistantChange}/>
+      <div className={styles.Configuration}>
+        <Assistant onAssistantChange={handleAssistantChange}/>
+        <Theme />
+      </div>
     </div>
   );
 }
