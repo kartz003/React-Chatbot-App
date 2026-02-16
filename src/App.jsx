@@ -70,6 +70,18 @@ function App() {
     setAssistant(newAssistant);
   }
 
+  function updateChats(messages = []) {
+    setChats((prevChats) => 
+      prevChats.map((chat) => 
+        (chat.id === activeChatId ? { ...chat, messages } : chat)
+      )
+    );
+  }
+
+  function handleChatMessagesUpdate(messages) {
+    updateChats(messages);
+  }
+
   return (
     <div className={styles.App}>
       <header className={styles.Header}>
@@ -79,7 +91,7 @@ function App() {
       <div className={styles.Content}>
         <Sidebar chats={chats} activeChatId={activeChatId} onActiveChatIdChange={setActiveChatId} />
         <main className={styles.Main}>
-          <Chat assistant={assistant} chatId={activeChatId} chatMessages={activeChatMessages} />
+          <Chat assistant={assistant} chatId={activeChatId} chatMessages={activeChatMessages} onChatMessagesUpdate={handleChatMessagesUpdate} />
           <div className={styles.Configuration}>
             <Assistant onAssistantChange={handleAssistantChange}/>
             <Theme />

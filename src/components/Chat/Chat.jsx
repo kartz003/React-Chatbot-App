@@ -4,7 +4,7 @@ import { Loader } from "../Loader/Loader.jsx";
 import { useEffect, useState } from "react";
 import styles from "./Chat.module.css";
 
-export function Chat({ assistant, chatId, chatMessages }) {
+export function Chat({ assistant, chatId, chatMessages, onChatMessagesUpdate }) {
     const [messages, setMessages] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isStreaming, setIsStreaming] = useState(false);
@@ -12,6 +12,10 @@ export function Chat({ assistant, chatId, chatMessages }) {
     useEffect(() => {
         setMessages(chatMessages);
     }, [chatId]);
+
+    useEffect(() => {
+        onChatMessagesUpdate(messages);
+    }, [messages]);
 
     function updateLastMessageContent(content) {
         setMessages((prevMessages) => 
