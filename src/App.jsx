@@ -72,9 +72,10 @@ function App() {
   }
 
   function handleChatMessagesUpdate(messages) {
+    const title = messages[0]?.content.split(" ").slice(0, 7).join(" ");
     setChats((prevChats) => 
       prevChats.map((chat) => 
-        (chat.id === activeChatId ? { ...chat, messages } : chat)
+        (chat.id === activeChatId ? { ...chat, title: chat.title ?? title, messages } : chat)
       )
     );
   }
@@ -82,7 +83,7 @@ function App() {
   function handleNewChatCreate() {
     const id = uuidv4();
     setActiveChatId(id);
-    setChats((prevChats) => [...prevChats, { id, title: "New Chat", messages: [] }]);
+    setChats((prevChats) => [...prevChats, { id, messages: [] }]);
   }
 
   function handleActiveChatIdChange(id) {
