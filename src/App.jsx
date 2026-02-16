@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 import styles from "./App.module.css";
 // import { Assistant as AssistantClass } from "./assistants/googleai.js";
 // import { Assistant } from "./assistants/openai.js"; // couldn't test because its not free
@@ -70,7 +71,7 @@ function App() {
     setAssistant(newAssistant);
   }
 
-  function updateChats(messages = []) {
+  function handleChatMessagesUpdate(messages) {
     setChats((prevChats) => 
       prevChats.map((chat) => 
         (chat.id === activeChatId ? { ...chat, messages } : chat)
@@ -78,8 +79,15 @@ function App() {
     );
   }
 
-  function handleChatMessagesUpdate(messages) {
-    updateChats(messages);
+  function handleNewChatCreate() {
+    const id = uuidv4();
+    setActiveChatId(id);
+    setChats((prevChats) => [...prevChats, { id, title: "New Chat", messages: [] }]);
+  }
+
+  function handleActiveChatIdChange(id) {
+    setActiveChatId(id);
+    setChats((prevChats) => prevChats.filter(({ messages }) => messages.length > 0));
   }
 
   return (
@@ -89,7 +97,13 @@ function App() {
         <h2 className={styles.Title}> AI Chatbot </h2>
       </header>
       <div className={styles.Content}>
-        <Sidebar chats={chats} activeChatId={activeChatId} onActiveChatIdChange={setActiveChatId} />
+        <Sidebar 
+          chats={chats} 
+          activeChatId={activeChatId} 
+          activeChatMessages={activeChatMessages}
+          onActiveChatIdChange={handleActiveChatIdChange} 
+          onNewChatCreate={handleNewChatCreate} 
+          />
         <main className={styles.Main}>
           <Chat assistant={assistant} chatId={activeChatId} chatMessages={activeChatMessages} onChatMessagesUpdate={handleChatMessagesUpdate} />
           <div className={styles.Configuration}>
