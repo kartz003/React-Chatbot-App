@@ -6,7 +6,8 @@ import { Loader } from "./components/Loader/Loader.jsx";
 import { Assistant } from "./assistants/googleai.js";
 // import { Assistant } from "./assistants/openai.js"; // couldn't test because its not free
 // import { Assistant } from "./assistants/deepseekai.js"; // couldn't test because its not free
-// import { Assistant } from "./assistants/anthropic.js"; // couldn't test because its not free
+// import { Assistant } from "./assistants/anthropicai.js"; // couldn't test because its not free
+// import { Assistant } from "./assistants/xai.js"; // couldn't test because its not free
 
 function App() {
   const assistant = new Assistant;
