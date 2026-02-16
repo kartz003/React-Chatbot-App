@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import styles from "./App.module.css";
 // import { Assistant as AssistantClass } from "./assistants/googleai.js";
 // import { Assistant } from "./assistants/openai.js"; // couldn't test because its not free
@@ -12,24 +12,51 @@ import { Chat } from "./components/Chat/Chat.jsx";
 
 const CHATS = [
   {
-    id: 1,
-    title: "How to use AI Tools API in React Application",
-  },
-  {
     id: 2,
     title: "Gemini AI vs ChatGPT",
-  },
-  {
-    id: 3,
-    title: "Comparising Models for Popular AI Tools",
+    messages: [
+      { role: "user", content: "What is better ChatGPT or Gemini?" },
+      {
+        role: "assistant",
+        content: "Hi! Can you explain for what type of tasks you will use it?",
+      },
+    ],
   },
   {
     id: 4,
     title: "How to use AI tools in your daily life",
-  },
-  {
-    id: 5,
-    title: "How to use AI tools in your daily work",
+    messages: [
+      { role: "user", content: "Hey! How to use AI in my life?" },
+      {
+        role: "assistant",
+        content: "Hi! Would you like to use it for work or for hobbies?",
+      },
+      { role: "user", content: "What is better ChatGPT or Gemini?" },
+      {
+        role: "assistant",
+        content: "Hi! Can you explain for what type of tasks you will use it?",
+      },
+      { role: "user", content: "Hey! How to use AI in my life?" },
+      {
+        role: "assistant",
+        content: "Hi! Would you like to use it for work or for hobbies?",
+      },
+      { role: "user", content: "What is better ChatGPT or Gemini?" },
+      {
+        role: "assistant",
+        content: "Hi! Can you explain for what type of tasks you will use it?",
+      },
+      { role: "user", content: "Hey! How to use AI in my life?" },
+      {
+        role: "assistant",
+        content: "Hi! Would you like to use it for work or for hobbies?",
+      },
+      { role: "user", content: "What is better ChatGPT or Gemini?" },
+      {
+        role: "assistant",
+        content: "Hi! Can you explain for what type of tasks you will use it?",
+      },
+    ],
   },
 ];
 
@@ -37,6 +64,7 @@ function App() {
   const [assistant, setAssistant] = useState();
   const [chats, setChats] = useState(CHATS);
   const [activeChatId, setActiveChatId] = useState(2);
+  const activeChatMessages = useMemo(() => chats.find(({ id }) => id === activeChatId)?.messages ?? [], [chats, activeChatId]);
   
   function handleAssistantChange(newAssistant) {
     setAssistant(newAssistant);
@@ -51,7 +79,7 @@ function App() {
       <div className={styles.Content}>
         <Sidebar chats={chats} activeChatId={activeChatId} onActiveChatIdChange={setActiveChatId} />
         <main className={styles.Main}>
-          <Chat assistant={assistant} />
+          <Chat assistant={assistant} chatId={activeChatId} chatMessages={activeChatMessages} />
           <div className={styles.Configuration}>
             <Assistant onAssistantChange={handleAssistantChange}/>
             <Theme />
