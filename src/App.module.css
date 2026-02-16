@@ -9,6 +9,7 @@
 
 .Header {
   text-align: center;
+  padding-left: calc(260px + 16px);
 }
 
 .Logo {
@@ -35,4 +36,19 @@
   gap: 8px;
   font-size: 14px;
   opacity: 0.8;
+}
+
+.Content {
+  display: flex;
+  flex-grow: 1;
+  gap: 16px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.Main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 16px;
 }
