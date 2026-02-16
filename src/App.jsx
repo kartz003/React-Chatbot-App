@@ -2,10 +2,11 @@ import { useState } from "react";
 import styles from "./App.module.css";
 import { Chat } from "./components/Chat/Chat.jsx";
 import { Controls } from "./components/Controls/Controls.jsx";
-import { Assistant } from "./assistants/googleai.js";
 import { Loader } from "./components/Loader/Loader.jsx";
+import { Assistant } from "./assistants/googleai.js";
 // import { Assistant } from "./assistants/openai.js"; // couldn't test because its not free
 // import { Assistant } from "./assistants/deepseekai.js"; // couldn't test because its not free
+// import { Assistant } from "./assistants/anthropic.js"; // couldn't test because its not free
 
 function App() {
   const assistant = new Assistant;
@@ -24,7 +25,7 @@ function App() {
   }
   
   function addMessage(message) {
-    setMessages((prevMessages) =>[...prevMessages, message]);
+    setMessages((prevMessages) => [...prevMessages, message]);
   }
 
   async function handleContentSend(content) {
