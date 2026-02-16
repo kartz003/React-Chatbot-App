@@ -70,7 +70,7 @@
     content: "";
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 641px) {
     .Sidebar {
         position: fixed;
         top: 0;
