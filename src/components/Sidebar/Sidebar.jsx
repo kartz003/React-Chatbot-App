@@ -22,8 +22,16 @@ export function Sidebar({ chats, activeChatId, activeChatMessages, onActiveChatI
             </button>
 
             <div className={styles.Sidebar} data-open={isOpen}>
-                <button className={styles.NewChatButton} onClick={onNewChatCreate} disabled={activeChatMessages.length === 0}>
-                    New Chat
+                <button 
+                    className={styles.NewChatButton} 
+                    onClick={() => {
+                        onNewChatCreate();
+                        if (isOpen) {
+                            handleSidebarToggle();
+                        }
+                    }} 
+                    disabled={activeChatMessages.length === 0}>
+                        New Chat
                 </button>
                 <ul className={styles.Chats}>
                     {chats
