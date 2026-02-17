@@ -4,7 +4,7 @@ import { Loader } from "../Loader/Loader.jsx";
 import { useEffect, useState } from "react";
 import styles from "./Chat.module.css";
 
-export function Chat({ assistant, chatId, chatMessages, onChatMessagesUpdate }) {
+export function Chat({ assistant, isActive = false, chatId, chatMessages, onChatMessagesUpdate }) {
     const [messages, setMessages] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isStreaming, setIsStreaming] = useState(false);
@@ -17,7 +17,7 @@ export function Chat({ assistant, chatId, chatMessages, onChatMessagesUpdate }) 
     }, [chatId]);
 
     useEffect(() => {
-        onChatMessagesUpdate(messages);
+        onChatMessagesUpdate(chatId, messages);
     }, [messages]);
 
     function updateLastMessageContent(content) {
@@ -57,6 +57,8 @@ export function Chat({ assistant, chatId, chatMessages, onChatMessagesUpdate }) 
         }
     }
     
+    if (!isActive) return null;
+
     return (
         <>
             {isLoading && <Loader /> }
